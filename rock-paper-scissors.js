@@ -4,7 +4,10 @@ function getComputerChoice(){
 }
 
 function playRound(computer, player){
-    if(computer == player){
+    if(player == null || player == NaN){
+        console.log('Please enter a vaid response.');
+    }
+    else if(computer == player){
         console.log('It is a draw!');
         return 0.5;
     }
@@ -48,7 +51,7 @@ function playGame(){
     let draws = 0;
     for(let i = 0; i < 5; i++){
         let computerSelection = getComputerChoice();
-        let playerSelection = prompt("Choose between Rock/Paper/Scissors :");
+        let playerSelection = "Rock";
         let score = playRound(computerSelection,playerSelection);
         if(score == 0.5){
             draws += 1;
