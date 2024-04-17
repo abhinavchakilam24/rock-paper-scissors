@@ -12,6 +12,16 @@ body{
     display: flex;
     justify-content: space-evenly;
 }
+
+.heading, .final-winner {
+    color: #142d4c;
+    text-align: center;
+}
+
+.final-winner{
+    margin-top: 3px;
+}
+
 .navbar{
     display: flex;
     justify-content: flex-start;
@@ -25,6 +35,7 @@ body{
     margin: 5px;
     padding-left: 15px;
 }
+
 .link{
     color: #142d4c;
     font-size: 22px;
@@ -32,12 +43,8 @@ body{
     padding-right: 20px;
     text-decoration: none;
 }
-.heading{
-    color: #142d4c;
-    text-align: center;
-}
 
-.rock, .paper, .scissors{
+#rock, #paper, #scissors{
     background-color:#9fd3c7;
     border-radius: 8px;
     color: #385170;
@@ -45,4 +52,17 @@ body{
     padding: 10px;
     height: auto;
     width: auto;
+}
+
+table{
+    margin-left: auto;
+  margin-right: auto;
+}
+
+.player-score, .computer-score{
+    text-align: center;
+}
+
+#winner{
+    text-align: center;
 }

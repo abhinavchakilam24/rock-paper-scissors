@@ -1,76 +1,103 @@
-function getComputerChoice(){
-    let choices=['Rock', 'Paper', 'Scissors'];
-    return choices[Math.floor(Math.random()*3)];
+let playerScore = 0;
+let computerScore = 0;
+let counter = 0;
+
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.getElementById("scissors");
+
+rockButton.addEventListener("click", function() {
+    var playerSelection = "Rock";
+    playRound(playerSelection, playerScore, computerScore);
+});
+paperButton.addEventListener("click", function() {
+    var playerSelection = "Paper";
+    playRound(playerSelection, playerScore, computerScore);
+});
+scissorsButton.addEventListener("click", function() {
+    var playerSelection = "Scissors";
+    playRound(playerSelection, playerScore, computerScore);
+});
+
+function playRound(playerSelection, playerScore, computerScore){
+    if(counter < 5){
+        var computerSelection = getComputerChoice();
+        const computerChoice = document.querySelector(".computer-choice");
+        computerChoice.textContent = "Your Opponent's choice is " + computerSelection;
+        const playerChoice = document.querySelector(".player-choice");
+        playerChoice.textContent = "Your choice is " + playerSelection; 
+        conductRound(computerSelection,playerSelection, computerScore, playerScore);
+
+        const player_score = document.querySelector(".player-score"); 
+        const computer_score = document.querySelector(".computer-score");
+        console.log(playerScore);
+        console.log(computerScore);
+        player_score.textContent = playerScore;
+        computer_score.textContent = computerScore;
+
+        counter += 1;
+        if(counter == 5){
+            rockButton.disabled = true;
+            paperButton.disabled = true;
+            scissorsButton.disabled = true;
+            declareWinners(playerScore, computerScore);
+        }
+    }
 }
 
-function playRound(computer, player){
-    if(player == null || player == NaN){
-        console.log('Please enter a vaid response.');
+function declareWinners(playerScore, computerScore) {
+    const finalWinner = document.querySelector(".final-winner");
+    if(playerScore == computerScore){
+        finalWinner.textContent = "It's a draw!";
     }
-    else if(computer == player){
-        console.log('It is a draw!');
-        return 0.5;
+    else if(playerScore > computerScore){
+        finalWinner.textContent = "Player has won the game!";
+    }
+    else{
+        finalWinner.textContent = "Computer has won the game!";
+    }
+}
+
+function conductRound(computer, player, computerScore, playerScore){
+    const winner = document.getElementById('winner');
+    if(computer == player){
+        winner.textContent = 'It is a draw! No one gets a point';
     }
     else{
         if(computer == 'Rock'){
             if(player == 'Paper'){
-                console.log('You Win! Paper beats Rock');
-                return 1;
+                winner.textContent = 'You Win! Paper beats Rock';
+                playerScore += 1;
             }
             else if(player == 'Scissors'){
-                console.log('You lose! Rock beats Scissors')
-                return 0;
+                winner.textContent = 'You lose! Rock beats Scissors';
+                computerScore += 1;
             }
         }
         else if(computer == 'Paper'){
             if(player == 'Rock'){
-                console.log('You Lose! Paper beats Rock');
-                return 0;
+                winner.textContent = 'You Lose! Paper beats Rock';
+                computerScore += 1;
             }
             else if(player == 'Scissors'){
-                console.log('You Win! Scissors beats Paper');
-                return 1;
+                winner.textContent = 'You Win! Scissors beats Paper';
+                playerScore += 1;
             }
         }
         else if(computer == 'Scissors'){
             if(player == 'Rock'){
-                console.log('You Win! Rock beats Scissors');
-                return 1;
+                winner.textContent = 'You Win! Rock beats Scissors';
+                playerScore += 1;
             }
             else if(player == 'Paper'){
-                console.log('You Lose! Scissors beats Paper');
-                return 0;
+                winner.textContent = 'You Lose! Scissors beats Paper';
+                computerScore += 1;
             }
         }
     }
 }
 
-function playGame(){
-    let playerScore = 0;
-    let computerScore = 0;
-    let draws = 0;
-    for(let i = 0; i < 5; i++){
-        let computerSelection = getComputerChoice();
-        let playerSelection = "Rock";
-        let score = playRound(computerSelection,playerSelection);
-        if(score == 0.5){
-            draws += 1;
-            score =0;
-        }
-        playerScore += score;
-    }
-    computerScore =  5 - (playerScore + draws);
-    if(playerScore == computerScore){
-        console.log('Its a draw!');
-    }
-    else if(playerScore > computerScore){
-        console.log('Player has won the game!');
-    }
-    else{
-        console.log('Computer has won the game!');
-    }
-    console.log('Player score is :' + playerScore);
-    console.log('Computer score is :' + computerScore);
+function getComputerChoice(){
+    let choices=['Rock', 'Paper', 'Scissors'];
+    return choices[Math.floor(Math.random()*3)];
 }
-
-playGame();
