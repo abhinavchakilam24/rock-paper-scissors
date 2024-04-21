@@ -1,2 +1,3 @@
 # rock-paper-scissors
-The Odin Project Tutorials
+Odin Project Tutorials <br />
+Odin Project: https://www.theodinproject.com/
